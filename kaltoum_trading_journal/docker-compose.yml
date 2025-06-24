@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ./trading_app
+      dockerfile: Dockerfile
+    ports:
+      - "8080:5000"
+    volumes:
+      - ./trading_app:/app
+      - ./trading_app/logs:/app/logs    # Mount logs folder for promtail access
+    command: python3 app.py
+
+  loki:
+    image: grafana/loki:2.9.2
+    ports:
+      - "3100:3100"
+    command: -config.file=/etc/loki/local-config.yaml
+
+  promtail:
+    image: grafana/promtail:latest
+    volumes:
+      - ./promtail-config.yaml:/etc/promtail/config.yaml
+      - ./trading_app/logs:/app/logs    # Mount logs folder to read trades.log
+    command: -config.file=/etc/promtail/config.yaml
+
+  grafana:
+    image: grafana/grafana-oss
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+volumes:
+  grafana-storage:
+

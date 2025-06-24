@@ -1,0 +1,15 @@
+2025-06-23 02:54:12,081 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://172.18.0.2:5000
+2025-06-23 02:54:12,081 - [33mPress CTRL+C to quit[0m
+2025-06-23 02:55:01,586 - 172.18.0.1 - - [23/Jun/2025 02:55:01] "GET /trades HTTP/1.1" 200 -
+2025-06-23 02:55:38,443 - 172.18.0.1 - - [23/Jun/2025 02:55:38] "GET /trades HTTP/1.1" 200 -
+2025-06-23 02:56:34,324 - New trade: EURUSD long, result: 100, tags: test
+2025-06-23 02:56:34,324 - 172.18.0.1 - - [23/Jun/2025 02:56:34] "[35m[1mPOST /add_trade HTTP/1.1[0m" 201 -
+2025-06-23 02:57:15,388 - New trade: EURUSD long, result: 123.45, tags: test
+2025-06-23 02:57:15,389 - 172.18.0.1 - - [23/Jun/2025 02:57:15] "[35m[1mPOST /add_trade HTTP/1.1[0m" 201 -
+2025-06-23 03:00:20,275 - New trade: EURUSD long, result: 123.45, tags: test
+2025-06-23 03:00:20,275 - 172.18.0.1 - - [23/Jun/2025 03:00:20] "[35m[1mPOST /add_trade HTTP/1.1[0m" 201 -
+2025-06-23 06:22:39,136 - New trade: EURUSD long, result: 150.0, tags: test, strategy1
+2025-06-23 06:29:47,959 - New trade: EURUSD long, result: 150.0, tags: test, strategy1

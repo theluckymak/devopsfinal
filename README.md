@@ -1,29 +1,36 @@
-# Kaltoum Trading Journal
+Kaltoum Trading Journal
 
-Этот проект — простое приложение дневника трейдов на Flask.  
-Позволяет добавлять записи о сделках через REST API, которые логируются в файл.  
-Логи собираются и отправляются в Loki через Promtail, визуализация происходит в Grafana.  
+Этот проект — простое приложение дневника трейдов на Flask.
+Позволяет добавлять записи о сделках через REST API, которые логируются в файл.
+Логи собираются и отправляются в Loki через Promtail, визуализация происходит в Grafana.
 Все сервисы запускаются вместе с помощью Docker Compose.
+Что требовалось сделать
 
-## Что требовалось сделать
+    Создать приложение дневника трейдов, принимающее данные и логирующее их.
 
-- Создать приложение дневника трейдов, принимающее данные и логирующее их.
-- Настроить Loki и Promtail для сбора и передачи логов.
-- Использовать Grafana для запроса и визуализации логов сделок.
-- Продемонстрировать систему, добавив сделки, запросив логи и сделав скриншоты:
-  - Запущенных контейнеров Docker
-  - Успешного добавления сделки
-  - Логов, записанных в файл
-  - Логов, полученных из Loki
-  - Дашборда Grafana с отображением логов
+    Настроить Loki и Promtail для сбора и передачи логов.
 
-## Как использовать
+    Использовать Grafana для запроса и визуализации логов сделок.
 
-1. Собрать и запустить сервисы командой:
-   
-   docker compose up --build
+    Продемонстрировать систему, добавив сделки, запросив логи и сделав скриншоты:
 
-    Добавить сделку через терминал с помощью curl:
+        Запущенных контейнеров Docker
+
+        Успешного добавления сделки
+
+        Логов, записанных в файл
+
+        Логов, полученных из Loki
+
+        Дашборда Grafana с отображением логов
+
+Как использовать
+
+    Собрать и запустить сервисы командой:
+
+docker compose up --build
+
+Добавить сделку через терминал с помощью curl:
 
 curl -X POST http://localhost:8080/add_trade \
   -H "Content-Type: application/json" \
@@ -35,71 +42,47 @@ cat trading_app/logs/trades.log
 
 Запросить логи из Loki:
 
-curl -G http://localhost:3100/loki/api/v1/query --data-urlencode 'query={job="trading_journal"}'
+    curl -G http://localhost:3100/loki/api/v1/query --data-urlencode 'query={job="trading_journal"}'
 
-Открыть Grafana по адресу http://localhost:3000,
-войти и создать запросы для визуализации логов трейдов.
-
-
-in english 
+    Открыть Grafana по адресу http://localhost:3000, войти и создать запросы для визуализации логов трейдов.
 
 Kaltoum Trading Journal
 
-This project is a simple trading journal application built with Flask. 
-It allows you to add trade entries via a REST API, which are logged into a file. 
+This project is a simple trading journal application built with Flask.
+It allows you to add trade entries via a REST API, which are logged into a file.
 The logs are collected and sent to Loki using Promtail, and you can visualize them with Grafana.
 All components run together using Docker Compose.
+What the Task Asked
 
-## What the Task Asked
+    Build the trading journal app to accept trade data and log it.
 
-- Build the trading journal app to accept trade data and log it.
-- Set up Loki and Promtail to collect and forward logs.
-- Use Grafana to query and visualize the logged trades.
-- Demonstrate the system by adding trades, querying logs, and showing screenshots of:
-  - Running Docker containers
-  - Successful trade addition
-  - Logs stored in the file
-  - Logs queried from Loki
-  - Grafana dashboard displaying the logs
+    Set up Loki and Promtail to collect and forward logs.
 
-This README summarizes the setup, usage, and deliverables for the task.
+    Use Grafana to query and visualize the logged trades.
 
-You said:
-wheres the how to use
-ChatGPT said:
+    Demonstrate the system by adding trades, querying logs, and showing screenshots of:
 
-Got it! Here’s the full README with a simple project explanation, task summary, and a how-to-use section — all in one copy-paste block:
+        Running Docker containers
 
-# Kaltoum Trading Journal
+        Successful trade addition
 
-This project is a simple trading journal application built with Flask. It allows you to add trade entries via a REST API,
-which are logged into a file. The logs are collected and sent to Loki using Promtail,
-and you can visualize them with Grafana. All components run together using Docker Compose.
+        Logs stored in the file
 
- What the Task Asked
+        Logs queried from Loki
 
-- Build the trading journal app to accept trade data and log it.
-- Set up Loki and Promtail to collect and forward logs.
-- Use Grafana to query and visualize the logged trades.
-- Demonstrate the system by adding trades, querying logs, and showing screenshots of:
-  - Running Docker containers
-  - Successful trade addition
-  - Logs stored in the file
-  - Logs queried from Loki
-  - Grafana dashboard displaying the logs
+        Grafana dashboard displaying the logs
 
- How to Use
+How to Use
 
+    Build and start the services with Docker Compose:
 
- Build and start the services with Docker Compose:
-  
-             docker compose up --build
+docker compose up --build
 
-  Add trades using curl commands in the terminal:
+Add trades using curl commands in the terminal:
 
-     curl -X POST http://localhost:8080/add_trade \
-     -H "Content-Type: application/json" \
-     -d '{"pair": "ETHUSD", "side": "long", "result": 150, "tags": "test"}'
+curl -X POST http://localhost:8080/add_trade \
+  -H "Content-Type: application/json" \
+  -d '{"pair": "ETHUSD", "side": "long", "result": 150, "tags": "test"}'
 
 Check the logs file to confirm trades are recorded:
 
@@ -109,8 +92,4 @@ Query Loki to see collected logs:
 
 curl -G http://localhost:3100/loki/api/v1/query --data-urlencode 'query={job="trading_journal"}'
 
-Open Grafana dashboard at http://localhost:3000,
-log in, and create queries to visualize your trading logs.
-
-
-
+Open Grafana dashboard at http://localhost:3000, log in, and create queries to visualize your trading logs.
